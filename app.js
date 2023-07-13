@@ -5,6 +5,7 @@ const cors = require("cors")
 const mongoose = require("mongoose")
 const config = require("./utils/config")
 const blogsRouter = require("./controllers/blogs")
+const { dummy } = require("./utils/list_helper")
 
 mongoose.connect(config.mongoUrl)
     .then(() => {
