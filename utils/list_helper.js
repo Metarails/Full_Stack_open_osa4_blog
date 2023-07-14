@@ -26,6 +26,24 @@ const totalLikes = (blogs) => {
 
 }
 
+const favoriteBlog = (blogs) => {
+	const favoriteBlog = blogs.reduce( (fav, blog) => {
+		// console.log("in reducer fav: ", fav)
+		if (fav === 0){
+			// console.log("replacing")
+			fav = blog
+		}
+
+		if (blog.likes > fav.likes){
+			fav = blog
+		}
+
+		return fav
+	}, 0)
+
+	return favoriteBlog
+}
+
 module.exports = {
-	dummy, totalLikes
+	dummy, totalLikes, favoriteBlog
 }
