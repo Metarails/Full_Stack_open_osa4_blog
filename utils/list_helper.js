@@ -66,6 +66,22 @@ const mostBlogs = (blogs) => {
 
 }
 
+const mostLikes = (blogs) => {
+	const likesBlog = blogs.reduce( (likes, blog) => {
+		console.log("in reducer likes: ", likes)
+		if ( blog.author in likes){
+			console.log("author found: ", blog.author)
+		}
+
+		
+
+		return likes
+	}, {})
+
+	return favoriteBlog
+
+}
+
 module.exports = {
-	dummy, totalLikes, favoriteBlog, mostBlogs
+	dummy, totalLikes, favoriteBlog, mostBlogs, mostLikes
 }
