@@ -1,4 +1,5 @@
 // const blogModel = require("../models/blog")
+const _ = require("lodash")
 
 const dummy = (blogs) => {
 	// console.log("dummy action: ", blogs)
@@ -44,6 +45,27 @@ const favoriteBlog = (blogs) => {
 	return favoriteBlog
 }
 
+const mostBlogs = (blogs) => {
+	// console.log("most blogs funktion: ", blogs)
+	const countBlogsAuthor = _.countBy(blogs, _.iteratee("author"))
+	// console.log("wwww: ", countBlogsAuthor )
+	let theMost = 0
+	_.forEach(countBlogsAuthor, (value, key) => {
+		// console.log("for each loop with authors: key (name) and values: ", key, value)
+		if (theMost === 0 ){
+			theMost = { author : key, blogs : value }
+		}
+		
+		if (value > theMost.blogs){
+			theMost = { author : key, blogs : value }
+		}
+	})
+
+	// console.log("the most wroten author: ", theMost)
+	return theMost
+
+}
+
 module.exports = {
-	dummy, totalLikes, favoriteBlog
+	dummy, totalLikes, favoriteBlog, mostBlogs
 }
