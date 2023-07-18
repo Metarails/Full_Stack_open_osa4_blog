@@ -67,18 +67,36 @@ const mostBlogs = (blogs) => {
 }
 
 const mostLikes = (blogs) => {
+
+	// const groupedAuthors = _.groupBy(blogs, _.iteratee("authors"))
+	// console.log("logs grouped by author: ", groupedAuthors)
+
 	const likesBlog = blogs.reduce( (likes, blog) => {
-		console.log("in reducer likes: ", likes)
-		if ( blog.author in likes){
-			console.log("author found: ", blog.author)
+		// console.log("in reducer likes: ", blog)
+		// console.log("in reducer likes: ", blog.author)
+		// console.log("keys in likes: ", Object.keys(likes))
+		if ( Object.keys(likes).includes(blog.author)){
+			// console.log("author found: ", blog.author)
+			likes[blog.author] +=  blog.likes
+		} else {
+			likes[blog.author] = blog.likes
 		}
-
-		
-
 		return likes
 	}, {})
 
-	return favoriteBlog
+	// console.log("likesBlog:", likesBlog)
+	let allLikes = []
+	_.forEach(likesBlog, (value, key) => {
+		allLikes.push({
+			author: key,
+			likes: value
+		})
+	})
+	// console.log("likes: ", allLikes)
+	// const sortedLikes = _.orderBy(allLikes, ["likes"], ["desc"])
+	// console.log("most likes: ", sortedLikes[0])
+
+	return _.orderBy(allLikes, ["likes"], ["desc"])[0]
 
 }
 
